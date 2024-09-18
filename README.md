@@ -2,26 +2,37 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 19.0.0-next.6.
 
-## Development server
+## Error reproduction steps
+1. Start the project
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+```console
+$ npm run start
+```
 
-## Code scaffolding
+2. Open the browser and navigate to `http://localhost:4200/`
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+There are no errors in the console.
 
-## Build
+3. Navigate to `http://localhost:4200/bar/foo` (You can click the "Bar/Foo" button)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+There are still no errors in the console.
 
-## Running unit tests
+4. Quit the dev server (press `q<enter>`, `ctrl-c` is currently broken).
+5. Start the dev server again
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```console
+$ npm run start
+```
 
-## Running end-to-end tests
+When the page in the browser reloads, you will see the following in the console:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+<pre>
+Watch mode enabled. Watching for file changes...
+NOTE: Raw file sizes do not reflect development server per-request transformations.
+  ➜  Local:   http://localhost:4200/
+  ➜  press h + enter to show help
+<span style="color: red;">
+10:36:18 AM [vite] Pre-transform error: Failed to load url /bar/polyfills.js (resolved id: /bar/polyfills.js). Does the file exist?
+10:36:18 AM [vite] Pre-transform error: Failed to load url /bar/main.js (resolved id: /bar/main.js). Does the file exist?
+</span>
+</pre>
